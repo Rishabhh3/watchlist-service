@@ -1,0 +1,31 @@
+### Add one
+POST http://localhost:8080/api/watchlist
+Content-Type: application/json
+
+{
+  "symbol": "tcs",
+  "companyName": "Tata Consultancy Services",
+  "targetPrice": 3800.00,
+  "notes": "watching for a dip"
+}
+
+### List all
+GET http://localhost:8080/api/watchlist
+
+### Get one
+GET http://localhost:8080/api/watchlist/1
+
+### Search
+GET http://localhost:8080/api/watchlist/search?symbol=TCS
+
+### Delete
+DELETE http://localhost:8080/api/watchlist/1
+
+### Invalid
+POST http://localhost:8080/api/watchlist
+Content-Type: application/json
+
+{
+  "symbol": "",
+  "targetPrice": -50
+}
