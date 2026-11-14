@@ -8,6 +8,13 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+// Down to the database — @Entity makes Hibernate build a table from it
+//Inside your code — you pass it between service and repository as a normal Java object
+//Out to the API — Spring converts it to JSON on the way back
+//So one class, three uses. Without it you’d be writing the field list three times:
+// once as CREATE TABLE, once as a Java class, once as JSON parsing.
+// The annotations let one definition serve all three.
+
 @Entity
 @Table(name = "watchlist_items")
 public class WatchListItem {
@@ -29,7 +36,31 @@ public class WatchListItem {
 
     private String notes;
 
-    private LocalDateTime addedate;
+    private LocalDateTime AddedAt;
 
+   public String getSymbol(){
+       return symbol;
+   }
+   public void setSymbol(String symbol){
+       this.symbol = symbol;
+   }
+   public void setAddedAt(LocalDateTime x){
+       this.AddedAt = x;
+   }
 
+    public long getId() {
+        return id;
+    }
+
+    public @Positive(message = "Target Price must be greater than zero") BigDecimal getTargetprice() {
+        return targetprice;
+    }
+
+    public @Size(max = 100) String getCompanyname() {
+        return companyname;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
 }
