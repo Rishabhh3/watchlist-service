@@ -19,7 +19,7 @@ GET http://localhost:8080/api/watchlist/1
 GET http://localhost:8080/api/watchlist/search?symbol=TCS
 
 ### Delete
-DELETE http://localhost:8080/api/watchlist/1
+DELETE http://localhost:8080/api/watchlist/2
 
 ### Invalid
 POST http://localhost:8080/api/watchlist

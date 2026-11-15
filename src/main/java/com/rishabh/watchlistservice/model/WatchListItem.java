@@ -47,6 +47,17 @@ public class WatchListItem {
    public void setAddedAt(LocalDateTime x){
        this.AddedAt = x;
    }
+   public void setCompanyName(String companyname) {
+        this.companyname = companyname;
+    }
+
+    public void setTargetPrice(BigDecimal targetprice) {
+        this.targetprice = targetprice;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     public long getId() {
         return id;
