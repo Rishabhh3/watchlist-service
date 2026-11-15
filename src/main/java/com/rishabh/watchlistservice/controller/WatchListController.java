@@ -18,6 +18,7 @@ public class WatchListController {
     public WatchListController(WatchListService watchListService){
         this.watchListService = watchListService;
     }
+
     @PostMapping
     public ResponseEntity<WatchListItem> add(@Valid @RequestBody WatchListItem item){
         WatchListItem saved = watchListService.addItem(item);
