@@ -2,13 +2,16 @@ package com.rishabh.watchlistservice.service;
 
 import com.rishabh.watchlistservice.model.WatchListItem;
 import com.rishabh.watchlistservice.repository.WatchlistRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class WatchListService {
+public class WatchListService implements Serializable {
     private final WatchlistRepository watchlistRepository;
 
     public WatchListService(WatchlistRepository watchlistRepository){
@@ -30,11 +33,13 @@ public class WatchListService {
         return watchlistRepository.findAll();
     }
 
+    @Cacheable(value = "watchlistItem", key = "#id")
     public WatchListItem getById(Long id){
+        System.out.println("---hitting the database for id---" + id + "---");
         return watchlistRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No watchlist item with id" + id));
     }
-
+    @CacheEvict(value = "watchlistItems", key = "#id")
     public void deleteById(Long id){
         if( ! watchlistRepository.existsById(id)){
             throw new IllegalArgumentException("No watchlist item by id");
